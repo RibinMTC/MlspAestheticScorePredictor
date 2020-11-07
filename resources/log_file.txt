@@ -1,0 +1,9 @@
+Aesthetic Predictor Initialized
+Received following request: {u'contentPath': u'/local/home/cribin/Documents/AestheticsBackup/Aesthetics_ContentViewer_Main/content-base/import_4/269.jpg', u'featureToPredict': u'aesthetic_score'}
+Starting prediction for: /local/home/cribin/Documents/AestheticsBackup/Aesthetics_ContentViewer_Main/content-base/import_4/269.jpg
+Received msg: /local/home/cribin/Documents/AestheticsBackup/Aesthetics_ContentViewer_Main/content-base/import_4/269.jpg
+predicted image score: 3.1778412
+Received following request: {u'contentPath': u'/local/home/cribin/Documents/AestheticsBackup/Aesthetics_ContentViewer_Main/content-base/import_4/87.jpg', u'featureToPredict': u'aesthetic_score'}
+Starting prediction for: /local/home/cribin/Documents/AestheticsBackup/Aesthetics_ContentViewer_Main/content-base/import_4/87.jpg
+Received msg: /local/home/cribin/Documents/AestheticsBackup/Aesthetics_ContentViewer_Main/content-base/import_4/87.jpg
+predicted image score: 3.393488
