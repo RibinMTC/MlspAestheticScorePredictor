@@ -1,24 +1,25 @@
-import io
-
-import requests
-
 from flask import Flask, jsonify, request
 
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 from src.main_predictor import MainPredictor
 
+model_initialized = False
 app = Flask(__name__)
 
 
-def load_image_from_url(img_url):
-    response = requests.get(img_url)
-    image_bytes = io.BytesIO(response.content)
-    return image_bytes
+@app.route('/is_model_ready', methods=['GET'])
+def is_model_ready():
+    if model_initialized:
+        return "Model initialized.", 200
+    else:
+        return "Model not initialized.", 400
 
 
 @app.route("/predict", methods=['POST'])
 def predict():
+    if not model_initialized:
+        return "Model not initialized.", 400
     input_json = request.get_json()
     if input_json is not None:
         print("Received following request: " + str(input_json))
@@ -35,6 +36,7 @@ app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 main_predictor = MainPredictor()
 
 print("Aesthetic Predictor Initialized")
+model_initialized = True
 
 if __name__ == '__main__':
     try:

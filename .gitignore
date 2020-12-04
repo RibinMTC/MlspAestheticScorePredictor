@@ -138,3 +138,5 @@ dmypy.json
 cython_debug/
 
 resources/*.mp4
+
+weights/inception_resnet_v2_weights_tf_dim_ordering_tf_kernels_notop.h5

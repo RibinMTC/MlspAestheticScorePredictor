@@ -71,14 +71,15 @@ class MainPredictor:
 
         num_of_scores = len(scores)
         if len(scores) > 0:
-            assert(num_of_scores == (end_frame - start_frame + 1))
+
+            # print("Num of predicted scores: " + str(num_of_scores) + " . Num of frames: " + str(
+            #             end_frame - start_frame + 1))
+            # assert(num_of_scores == (end_frame - start_frame + 1))
             average_score = np.mean(scores)
-            median_score = np.median(scores)
-            print("Average score: " + str(average_score))
-            print("Median score: " + str(median_score))
+            # median_score = np.median(scores)
             return average_score
 
-        return average_score, median_score
+        return average_score
 
     # def __predict_video(self, video_path):
     #     cap = cv2.VideoCapture(video_path)

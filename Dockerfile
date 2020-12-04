@@ -10,6 +10,8 @@ ENV PYTHONUNBUFFERED 1
 RUN apt-get update \
     && apt-get install mesa-utils -y
 
+COPY ./weights/inception_resnet_v2_weights_tf_dim_ordering_tf_kernels_notop.h5 /root/.keras/models/inception_resnet_v2_weights_tf_dim_ordering_tf_kernels_notop.h5
+
 # set work directory
 WORKDIR /aestheticScorePredictor
 

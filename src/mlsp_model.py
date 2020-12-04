@@ -75,18 +75,20 @@ class MlspModel:
                 return pre, helper
 
     def predict(self, img_path):
-        with self.graph.as_default():
-            with self.session.as_default():
-                try:
-                # load, pre-process it, and pass it to the model
-                    I = self.preprocessor(img.read_image(img_path))
-                    I = np.expand_dims(I, 0)
-                    I_score = self.helper_predictor.model.predict(I)
-
-                    return I_score[0][0]
-                except Exception as e:
-                    print("!!!!!!!!! The following exception occurred: " + str(e))
-                    return -1
+        model_input_img = img.read_image(img_path)
+        return self.predict_from_frame(model_input_img)
+        # with self.graph.as_default():
+        #     with self.session.as_default():
+        #         try:
+        #         # load, pre-process it, and pass it to the model
+        #             I = self.preprocessor(img.read_image(img_path))
+        #             I = np.expand_dims(I, 0)
+        #             I_score = self.helper_predictor.model.predict(I)
+        #
+        #             return I_score[0][0]
+        #         except Exception as e:
+        #             print("!!!!!!!!! The following exception occurred: " + str(e))
+        #             return -1
 
     def predict_from_frame(self, frame):
         with self.graph.as_default():
