@@ -2,10 +2,13 @@ import sys
 from os.path import dirname, abspath
 
 import cv2
+from flask import jsonify
+
 from src.mlsp_model import MlspModel
 from enum import Enum
 import numpy as np
 import mimetypes
+
 
 # import multiprocessing as mp
 # import subprocess as sp
@@ -29,14 +32,15 @@ class MainPredictor:
         self.__content_type_based_predictor_dict = {ContentType.IMAGE: self.__predict_image,
                                                     ContentType.VIDEO: self.__predict_video}
 
-    def predict_score(self, content_path, start_frame, end_frame):
+    def predict(self, content_path, start_frame, end_frame):
         content_type = self.__get_content_type(content_path)
         if content_type == ContentType.UNKNOWN:
             print("The type for the following file is not supported: " + content_path)
             return -1
 
         score = self.__content_type_based_predictor_dict[content_type](content_path, start_frame, end_frame)
-        return score
+        print('predicted image score: ' + str(score))
+        return jsonify({'aestheticScore': float(score)})
 
     def __get_content_type(self, content_path):
         mimestart = mimetypes.guess_type(content_path)[0]

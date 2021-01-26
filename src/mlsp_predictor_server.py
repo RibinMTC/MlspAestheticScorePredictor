@@ -26,10 +26,8 @@ def predict():
         content_path = str(input_json['contentPath'])
         start_frame = int(input_json['startFrame'])
         end_frame = int(input_json['endFrame'])
-        score = main_predictor.predict_score(content_path, start_frame, end_frame)
-        print('predicted image score: ' + str(score))
-        return jsonify({'aesthetic score': float(score)})
-    return jsonify({'aesthetic score': -1})
+        return main_predictor.predict(content_path, start_frame, end_frame)
+    return "Error in prediction.", 400
 
 
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)

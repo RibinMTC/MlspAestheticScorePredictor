@@ -1,0 +1,28 @@
+FROM continuumio/miniconda:latest
+
+# This prevents Python from writing out pyc files
+ENV PYTHONDONTWRITEBYTECODE 1
+# This keeps Python from buffering stdin/stdout
+ENV PYTHONUNBUFFERED 1
+
+RUN apt-get update \
+&& apt-get install mesa-utils -y
+
+# set work directory
+WORKDIR /predictorMainDir
+
+# copy requirements.txt
+COPY ./environment.yml /predictorMainDir/environment.yml
+
+RUN conda env create -f environment.yml
+
+ENV PATH /opt/conda/envs/mlsp_environment/bin:$PATH
+
+# copy project
+COPY . .
+
+# set app port
+EXPOSE 5001
+
+ENTRYPOINT ["gunicorn", "--config", "gunicorn_config.py", "--env", "API_CONFIG="api_config.json", "aesthetics_predictor_api_pkg.predictor_api_server:app"]
+

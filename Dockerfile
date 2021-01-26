@@ -30,5 +30,5 @@ COPY . .
 EXPOSE 5001
 
 #ENTRYPOINT [ "python3" ]
-ENTRYPOINT ["gunicorn", "--config", "gunicorn_config.py", "src.mlsp_predictor_server:app"]
-
+#ENTRYPOINT ["gunicorn", "--config", "gunicorn_config.py", "src.mlsp_predictor_server:app"]
+ENTRYPOINT ["gunicorn", "--config", "gunicorn_config.py", "--env", "API_CONFIG=api_config.json", "aesthetics_predictor_api_pkg.predictor_api_server:app"]

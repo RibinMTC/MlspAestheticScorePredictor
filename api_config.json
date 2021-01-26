@@ -1,0 +1,6 @@
+{
+    "port": 5001, 
+    "predictorClassName": "MainPredictor",
+    "predictorModulePath": "src.main_predictor"
+}
+
